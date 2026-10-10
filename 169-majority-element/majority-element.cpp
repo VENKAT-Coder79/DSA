@@ -2,26 +2,19 @@ class Solution {
 public:
     int majorityElement(vector<int>& nums) {
         int n=nums.size();
-        if (n <=1) return nums[0];
 
-
-        //first sort
-        sort(nums.begin(),nums.end());
-
-        int freq=1;
-        int ans=nums[0];
-        for(int i=1;i<n;i++){
-            if(nums[i] ==nums[i-1]){
-                freq++;
-            }
-            else{        //agar purane previous wala same nahi hai toh like[1,1,2,3,3]
-                freq=1;
+        int freq=0;
+        int ans=0;
+        for(int i=0;i<n;i++){
+            if( freq == 0){
                 ans=nums[i];
             }
-            if(freq > n/2){
-                return ans;
+            if(ans == nums[i]){
+                freq++;
             }
+            else freq--;
         }
-        return -1;
+        return ans;
+        
     }
 };
