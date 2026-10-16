@@ -1,29 +1,27 @@
 class Solution {
 public:
     int trap(vector<int>& height) {
+        //optimal approach T(O(n))  and S(O(1))
         int n=height.size();
-        
-        vector<int>lmax(n,0);
-        vector<int>rmax(n,0);
 
-        lmax[0]=height[0];
-        rmax[n-1]=height[n-1];
-
-        //lmax ko fill krna
-        for(int i=1;i <n;i++){
-            lmax[i]=max(lmax[i-1],height[i]);
-        }
-        //rmax ko fill krna
-        for(int i=n-2;i >=0;i--){
-            rmax[i]=max(rmax[i+1],height[i]);
-        }
-
-        //final ans store krna;
         int ans=0;
-        for(int i=0;i<n;i++){
-            ans = ans + min(lmax[i],rmax[i]) -height[i];
-        }
+        int l=0; int r=n-1;     //two pointer
+        int lmax=0; int rmax=0;
 
+        while(l < r){
+            lmax=max(lmax,height[l]);    //left maximum bar
+            rmax= max(rmax ,height[r]);   //right maximum bar
+
+            if(lmax < rmax){
+                ans=ans+ lmax-height[l];   
+                l++;
+            }
+            else{
+                ans= ans+ rmax-height[r];
+                r--;
+            }
+        }
         return ans;
+        
     }
 };
