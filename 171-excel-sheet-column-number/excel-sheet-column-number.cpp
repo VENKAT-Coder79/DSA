@@ -1,20 +1,12 @@
 class Solution {
 public:
-    int titleToNumber(string col) {
-        int sum = 0;
-        int p = 0;
-        int n = col.length();
-
-        for (int i = n - 1; i >= 0; i--) {
-            int tmp = col[i] - 64;
-            sum = sum + pow(26, p++) * tmp;  //power fuction double mein store kar raha tha ,isliye int
-            //ex=AB
-            //A=1;B=2;
-            //INDEX-0,1 
-
-            //((26^1)*1+(26^0)*2)=26+2=28;
-            //
+    int titleToNumber(string columnTitle) {
+        int ans=0;
+        for(int i=0;i <columnTitle.size();i++){
+            ans*=26;
+            ans+= (columnTitle[i] -'A' +1);
         }
-        return sum;
+        return ans;
+        
     }
 };
