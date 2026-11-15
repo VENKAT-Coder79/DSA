@@ -1,23 +1,19 @@
 class Solution {
 public:
+    // method 2 -optimal code-use one iterative loop
     vector<vector<int>> result; /// final result store karna
-    void solve(int start, int n, int k, vector<int> &temp) {
+    void solve(int start, int n, int k, vector<int>& temp) {
         if (k == 0) {
             result.push_back(temp);
             return;
         }
-        if (n-start+1  < k) {
-            return;
+        for (int i = start; i <= n - k + 1; i++) {
+            temp.push_back(i);
+
+            solve(i + 1, n, k - 1, temp);
+
+            temp.pop_back();
         }
-        //backtracking template
-
-        // include
-        temp.push_back(start);
-        solve(start + 1, n, k - 1, temp);
-
-        // exlclude
-        temp.pop_back();
-        solve(start + 1, n, k, temp);
     }
     vector<vector<int>> combine(int n, int k) {
         result.clear();
