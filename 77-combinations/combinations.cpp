@@ -1,12 +1,12 @@
 class Solution {
 public:
     vector<vector<int>> result; /// final result store karna
-    void solve(int start, int& n, int k, vector<int> &temp) {
+    void solve(int start, int n, int k, vector<int> &temp) {
         if (k == 0) {
             result.push_back(temp);
             return;
         }
-        if (start > n) {
+        if (n-start+1  < k) {
             return;
         }
         //backtracking template
