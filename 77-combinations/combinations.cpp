@@ -20,6 +20,7 @@ public:
         solve(start + 1, n, k, temp);
     }
     vector<vector<int>> combine(int n, int k) {
+        result.clear();
         vector<int> temp;
 
         solve(1, n, k, temp);
