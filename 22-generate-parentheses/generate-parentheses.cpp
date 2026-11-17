@@ -1,41 +1,31 @@
 class Solution {
 public:
+    // apporach 2 (better ,no need to check valid parenthesis or not)
+
     vector<string> result;
 
-    bool isvalid(string str) {
-        int count = 0; // pointer as i
-        for (char ch : str) {
-            if (ch == '(') {
-                count++; //+1 if open
-            } else {
-                count--; //-1 for close
-            }
-            // edge case like "())("
-            if (count < 0)
-                return false;
-        }
-        return count == 0;
-    }
-
-    void solve(string& curr, int n) {
+    void solve(string& curr, int n, int open, int close) {
         // base case
         if (curr.size() == 2 * n) {
-            if (isvalid(curr)) {
-                result.push_back(curr);
-            }
+
+            result.push_back(curr);
             return;
         }
-        curr.push_back('('); // backtracking template
-        solve(curr, n);
-        curr.pop_back();
+        if (open < n) {
+            curr.push_back('('); // backtracking template
+            solve(curr, n, open + 1, close);
+            curr.pop_back();
+        }
 
-        curr.push_back(')');
-        solve(curr, n);
-        curr.pop_back();
+        if (close < open) {
+            curr.push_back(')');
+            solve(curr, n, open, close + 1);
+            curr.pop_back();
+        }
     }
     vector<string> generateParenthesis(int n) {
         string curr = "";
-        solve(curr, n);
+        solve(curr, n, 0, 0);
         return result;
     }
 };
